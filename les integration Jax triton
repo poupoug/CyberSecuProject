@@ -1,0 +1,262 @@
+""Bibliothèque pour les intégrations JAX-Triton."""
+de  jax_triton . triton_call  importer  triton_call
+de  jax_triton . triton_call  importer  triton_kernel_call
+de  jax_triton . triton_call  importer  triton_kernel_call_lib
+de  jax_triton . triton_call  importer  cdiv
+de  jax_triton . triton_call  importer  strides_from_shape
+de  jax_triton . triton_call  importer  next_power_of_2
+  4 
+jax_triton/pallas/pallas_call.py
+@@ -29,6 +29,7 @@
+de  Jax . les interpréteurs  importent  partial_eval  en tant que  pe
+de  Jax . interprètes  importent  mlir
+de  Jax . interprètes  import  xla
+de  Jax . lib  importe  xla_client  en tant que  xc
+de  Jax . _src  importer  ad_util
+de  Jax . _src . lib . mlir  importer  ir
+de  Jax . _src . lib . mlir . les dialectes  importent  mhlo
+@@ -42,6 +43,7 @@
+
+du  triton . _C . libtriton  importer du  triton  en tant que  tc
+
+depuis  jax_triton  importer  triton_kernel_call_lib
+de  jax_triton . triton_call  import  submit_triton_kernel_call , avals_to_layouts
+de  jax_triton . baisse des importations de pallas  
+de  jax_triton . pallas  importer le  noyau  en tant que  pallas_core
+@@ -397,6 +399,8 @@ def pallas_call(f : Callable, out_shape : Any, *, debug : bool = False,
+                interpréter : bool  =  False ,
+                nom : Facultatif [ str ] =  Aucun ,
+                ** compiler_params : Any ):
+  xc . register_custom_call_target (
+    "triton_kernel_call" , triton_kernel_call_lib . get_custom_call (), plate -forme = "CUDA" )
+  si  la grille  est  None :""Bibliothèque pour les intégrations JAX-Triton."""
+de  jax_triton . triton_call  importer  triton_call
+de  jax_triton . triton_call  importer  triton_kernel_call
+de  jax_triton . triton_call  importer  triton_kernel_call_lib
+de  jax_triton . triton_call  importer  cdiv
+de  jax_triton . triton_call  importer  strides_from_shape
+de  jax_triton . triton_call  importer  next_power_of_2
+  4 
+jax_triton/pallas/pallas_call.py
+@@ -29,6 +29,7 @@
+de  Jax . les interpréteurs  importent  partial_eval  en tant que  pe
+de  Jax . interprètes  importent  mlir
+de  Jax . interprètes  import  xla
+de  Jax . lib  importe  xla_client  en tant que  xc
+de  Jax . _src  importer  ad_util
+de  Jax . _src . lib . mlir  importer  ir
+de  Jax . _src . lib . mlir . les dialectes  importent  mhlo
+@@ -42,6 +43,7 @@
+
+du  triton . _C . libtriton  importer du  triton  en tant que  tc
+
+depuis  jax_triton  importer  triton_kernel_call_lib
+de  jax_triton . triton_call  import  submit_triton_kernel_call , avals_to_layouts
+de  jax_triton . baisse des importations de pallas  
+de  jax_triton . pallas  importer le  noyau  en tant que  pallas_core
+@@ -397,6 +399,8 @@ def pallas_call(f : Callable, out_shape : Any, *, debug : bool = False,
+                interpréter : bool  =  False ,
+                nom : Facultatif [ str ] =  Aucun ,
+                ** compiler_params : Any ):
+  xc . register_custom_call_target (
+    "triton_kernel_call" , triton_kernel_call_lib . get_custom_call (), plate -forme = "CUDA" )
+  si  la grille  est  None :
+    si  in_specs  n'est  pas  None :
+      raise  ValueError ( "Impossible de spécifier `in_specs` avec une grille `None`." )
+  19 
+jax_triton/triton_call.py
+@@ -46,15 +46,12 @@
+sauf  ModuleNotFoundError :
+  passer
+
+de  jax_triton  importer  triton_kernel_call en tant que triton_kernel_call_lib  
+depuis  jax_triton  importer  triton_kernel_call_lib
+
+os . environ [ "TRITON_CACHE_DIR" ] =  ""
+carte , unsafe_map  =  util . safe_map , carte
+zip , unsafe_zip  =  util . safe_zip , zip
+
+xc . register_custom_call_target (
+    "triton_kernel_call" , triton_kernel_call_lib . get_custom_call (), plate -forme = "CUDA" )
+
+triton_type_mappings  = {}
+
+def  get_triton_type ( obj : Any ) ->  str :
+@@ -178,7 +175,7 @@ def émission_triton_kernel_call(ctx, nom, asm, mem_partagé, *,
+      nom , asm , mem_partagé , grille_0 , grille_1 , grille_2 , num_warps , arité )
+   descripteur de retour , keepalive
+
+def  triton_kernel_call_lowering ( ctx , * args , nom , asm , shared_mem ,
+def  triton_kernel_call_lowering ( ctx , * args , kernel_name , call_name , asm , shared_mem ,
+                                out_shapes , grille : GridOrLambda , num_warps : int ,
+                                dump_binary_path : Facultatif [ str ],
+                                input_output_aliases : Tuple [ Tuple [ int , int ], ...], ** metaparams ):
+@@ -190,7 +187,7 @@ def triton_kernel_call_lowering(ctx, *args, nom, asm, shared_mem,
+      pour  out_shape  dans  out_shapes ])
+  i32_type  =  ir . TypeEntier . get_signless ( 32 )
+  descripteur , keepalive  =  émettre_triton_kernel_call (
+      ctx , nom , asm . asm_map , shared_mem , dump_binary_path = dump_binary_path ,
+      ctx , nom_noyau , asm . asm_map , shared_mem , dump_binary_path = dump_binary_path ,
+      num_warps = num_warps , grid = grid , metaparams = metaparams )
+  ctx . module_context . add_keepalive ( garder en vie )
+  output_operand_aliases  =  ir . ArrayAttr . obtenir ([
+@@ -202,7 +199,7 @@ def triton_kernel_call_lowering(ctx, *args, nom, asm, shared_mem,
+      ])
+  sortie  =  mhlo . CustomCallOp (
+            [ out_type ], arguments ,
+            call_target_name = ir . StringAttr . obtenir ( "triton_kernel_call" ),
+            call_target_name = ir . StringAttr . obtenir ( nom_appel ),
+            a_effet_latéral = ir . BoolAttr . obtenir ( Faux ),
+            backend_config = ir . StringAttr . obtenir ( descripteur ),
+            version_api = ir . IntegerAttr . obtenir ( i32_type , 1 ),
+@@ -221,11 +218,14 @@ def __init__(self, asm_map):
+    soi . asm_map  =  asm_map
+
+def  triton_call ( * args , kernel , out_shape , grille : Union [ int , GridOrLambda ],
+                call_name : str  =  "triton_kernel_call" ,
+                num_warps = 4 , num_stages = 2 , dump_binary_path : Facultatif [ str ] =  Aucun ,
+                input_output_aliases : Dict [ int , int ] = {},
+                ** métaparamètres ):
+  sinon  CAN_USE_TRITON : _ 
+    raise  ValueError ( "`triton_call` n'est disponible que lorsque `triton` est installé." )
+  xc . register_custom_call_target (
+    nom_appel , triton_kernel_call_lib . get_custom_call (), plate -forme = "CUDA" )
+  si  estinstance ( grille , int ):
+    grille  = ( grille ,)
+  out_shape  =  tree_util . tree_map (
+@@ -236,10 +236,11 @@ def triton_call(*args, kernel, out_shape, grid: Union[int, GridOrLambda],
+  flat_out_shapes , out_tree  =  tree_util . tree_flatten ( out_shape )
+  avals_in  = [ noyau . raise_to_shaped ( core . get_aval ( a )) for  a  in  flat_args ]
+  avals_out  = [ noyau . ShapedArray ( a . shape , a . dtype ) for  a  in  flat_out_shapes ]
+  nom , asm_map , shared_mem  =  compile_triton_func (
+  nom_noyau , asm_map , mem_partagé  =  compile_triton_func (
+    avals_in , avals_out , kernel , num_warps , num_stages , metaparams )
+  asm  =  Asm ( asm_map )
+  out_flat  =  triton_kernel_call_p . bind ( * flat_args , nom = nom , asm = asm ,
+  out_flat  =  triton_kernel_call_p . bind ( * flat_args , nom_noyau = nom_noyau ,
+      nom_appel = nom_appel , asm = asm ,
+      mem_partagé = mem_partagé , out_shapes = tuple ( flat_out_shapes ),
+      grille = grille , num_warps = num_warps , num_stages = num_stages ,
+      dump_binary_path = dump_binary_path ,
+  2 
+lib/triton_kernel_call.cc
+@@ -125,7 +125,7 @@ pybind11::capsule EncapsulateFunction(T* fn) {
+  return  pybind11::capsule ( reinterpret_cast < void *>(fn), " xla._CUSTOM_CALL_TARGET " );
+}
+
+PYBIND11_MODULE ( triton_kernel_call , m) {
+PYBIND11_MODULE ( triton_kernel_call_lib , m) {
+  M. def ( " make_triton_call_descriptor " , &MakeTritonExecutable);
+  M. def ( " get_custom_call " , [](){
+      renvoie  EncapsulateFunction (do_custom_call);
+  2 
+setup.py
+@@ -22,7 +22,7 @@
+    packages = find_packages (),
+    ext_modules = [
+        Rallonge (
+            nom = "jax_triton. triton_kernel_call " ,
+            nom = "jax_triton. triton_kernel_call_lib " ,
+            sources = [ "lib/triton_kernel_call.cc" ],
+            include_dirs = [ "/usr/local/cuda/include" ,
+                          pybind11 . get_include ()],
+
+    si  in_specs  n'est  pas  None :
+      raise  ValueError ( "Impossible de spécifier `in_specs` avec une grille `None`." )
+  19 
+jax_triton/triton_call.py
+@@ -46,15 +46,12 @@
+sauf  ModuleNotFoundError :
+  passer
+
+de  jax_triton  importer  triton_kernel_call en tant que triton_kernel_call_lib  
+depuis  jax_triton  importer  triton_kernel_call_lib
+
+os . environ [ "TRITON_CACHE_DIR" ] =  ""
+carte , unsafe_map  =  util . safe_map , carte
+zip , unsafe_zip  =  util . safe_zip , zip
+
+xc . register_custom_call_target (
+    "triton_kernel_call" , triton_kernel_call_lib . get_custom_call (), plate -forme = "CUDA" )
+
+triton_type_mappings  = {}
+
+def  get_triton_type ( obj : Any ) ->  str :
+@@ -178,7 +175,7 @@ def émission_triton_kernel_call(ctx, nom, asm, mem_partagé, *,
+      nom , asm , mem_partagé , grille_0 , grille_1 , grille_2 , num_warps , arité )
+   descripteur de retour , keepalive
+
+def  triton_kernel_call_lowering ( ctx , * args , nom , asm , shared_mem ,
+def  triton_kernel_call_lowering ( ctx , * args , kernel_name , call_name , asm , shared_mem ,
+                                out_shapes , grille : GridOrLambda , num_warps : int ,
+                                dump_binary_path : Facultatif [ str ],
+                                input_output_aliases : Tuple [ Tuple [ int , int ], ...], ** metaparams ):
+@@ -190,7 +187,7 @@ def triton_kernel_call_lowering(ctx, *args, nom, asm, shared_mem,
+      pour  out_shape  dans  out_shapes ])
+  i32_type  =  ir . TypeEntier . get_signless ( 32 )
+  descripteur , keepalive  =  émettre_triton_kernel_call (
+      ctx , nom , asm . asm_map , shared_mem , dump_binary_path = dump_binary_path ,
+      ctx , nom_noyau , asm . asm_map , shared_mem , dump_binary_path = dump_binary_path ,
+      num_warps = num_warps , grid = grid , metaparams = metaparams )
+  ctx . module_context . add_keepalive ( garder en vie )
+  output_operand_aliases  =  ir . ArrayAttr . obtenir ([
+@@ -202,7 +199,7 @@ def triton_kernel_call_lowering(ctx, *args, nom, asm, shared_mem,
+      ])
+  sortie  =  mhlo . CustomCallOp (
+            [ out_type ], arguments ,
+            call_target_name = ir . StringAttr . obtenir ( "triton_kernel_call" ),
+            call_target_name = ir . StringAttr . obtenir ( nom_appel ),
+            a_effet_latéral = ir . BoolAttr . obtenir ( Faux ),
+            backend_config = ir . StringAttr . obtenir ( descripteur ),
+            version_api = ir . IntegerAttr . obtenir ( i32_type , 1 ),
+@@ -221,11 +218,14 @@ def __init__(self, asm_map):
+    soi . asm_map  =  asm_map
+
+def  triton_call ( * args , kernel , out_shape , grille : Union [ int , GridOrLambda ],
+                call_name : str  =  "triton_kernel_call" ,
+                num_warps = 4 , num_stages = 2 , dump_binary_path : Facultatif [ str ] =  Aucun ,
+                input_output_aliases : Dict [ int , int ] = {},
+                ** métaparamètres ):
+  sinon  CAN_USE_TRITON : _ 
+    raise  ValueError ( "`triton_call` n'est disponible que lorsque `triton` est installé." )
+  xc . register_custom_call_target (
+    nom_appel , triton_kernel_call_lib . get_custom_call (), plate -forme = "CUDA" )
+  si  estinstance ( grille , int ):
+    grille  = ( grille ,)
+  out_shape  =  tree_util . tree_map (
+@@ -236,10 +236,11 @@ def triton_call(*args, kernel, out_shape, grid: Union[int, GridOrLambda],
+  flat_out_shapes , out_tree  =  tree_util . tree_flatten ( out_shape )
+  avals_in  = [ noyau . raise_to_shaped ( core . get_aval ( a )) for  a  in  flat_args ]
+  avals_out  = [ noyau . ShapedArray ( a . shape , a . dtype ) for  a  in  flat_out_shapes ]
+  nom , asm_map , shared_mem  =  compile_triton_func (
+  nom_noyau , asm_map , mem_partagé  =  compile_triton_func (
+    avals_in , avals_out , kernel , num_warps , num_stages , metaparams )
+  asm  =  Asm ( asm_map )
+  out_flat  =  triton_kernel_call_p . bind ( * flat_args , nom = nom , asm = asm ,
+  out_flat  =  triton_kernel_call_p . bind ( * flat_args , nom_noyau = nom_noyau ,
+      nom_appel = nom_appel , asm = asm ,
+      mem_partagé = mem_partagé , out_shapes = tuple ( flat_out_shapes ),
+      grille = grille , num_warps = num_warps , num_stages = num_stages ,
+      dump_binary_path = dump_binary_path ,
+  2 
+lib/triton_kernel_call.cc
+@@ -125,7 +125,7 @@ pybind11::capsule EncapsulateFunction(T* fn) {
+  return  pybind11::capsule ( reinterpret_cast < void *>(fn), " xla._CUSTOM_CALL_TARGET " );
+}
+
+PYBIND11_MODULE ( triton_kernel_call , m) {
+PYBIND11_MODULE ( triton_kernel_call_lib , m) {
+  M. def ( " make_triton_call_descriptor " , &MakeTritonExecutable);
+  M. def ( " get_custom_call " , [](){
+      renvoie  EncapsulateFunction (do_custom_call);
+  2 
+setup.py
+@@ -22,7 +22,7 @@
+    packages = find_packages (),
+    ext_modules = [
+        Rallonge (
+            nom = "jax_triton. triton_kernel_call " ,
+            nom = "jax_triton. triton_kernel_call_lib " ,
+            sources = [ "lib/triton_kernel_call.cc" ],
+            include_dirs = [ "/usr/local/cuda/include" ,
+                          pybind11 . get_include ()],
