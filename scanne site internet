@@ -1,0 +1,15 @@
+Il est possible d'utiliser l'outil Nmap (Network Mapper) pour trouver l'adresse IP d'un site internet en utilisant la commande :
+
+Copy code
+nmap -sn [nom de domaine]
+La commande -sn permet de réaliser un ping scan qui va permettre de détecter les hôtes actifs sur le réseau et de récupérer leur adresse IP.
+
+Par exemple pour trouver l'adresse IP du site internet example.com, vous devrez entrer la commande suivante:
+
+Copy code
+nmap -sn example.com
+Il est important de noter que certains sites peuvent utiliser des systèmes de load-balancing ou de redirection DNS qui peuvent rendre plus complexe la récupération de l'adresse IP. Il est donc important de vérifier les termes d'utilisation et de politique de confidentialité avant de scanner un site internet. Il est également important de respecter les politiques de robots.txt des sites pour éviter de causer des dommages.
+
+
+
+
