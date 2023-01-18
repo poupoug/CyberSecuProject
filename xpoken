@@ -1,0 +1,14 @@
+Nmap (Network Mapper) possède une collection de scripts qui peuvent être utilisés pour l'analyse des vulnérabilités. Ces scripts, appelés NSE (Nmap Scripting Engine), permettent de détecter les vulnérabilités connues sur les systèmes ciblés en utilisant des méthodes telles que les requêtes de version, les tests de vulnérabilité spécifiques ou encore les identificateurs de vulnérabilité.
+
+Pour utiliser les scripts d'analyse des vulnérabilités Nmap, vous devrez entrer la commande suivante :
+
+Copy code
+nmap --script vuln [IP ou plage d'IP]
+Cela va lancer l'analyse sur les systèmes ciblés et afficher les vulnérabilités détectées, si elles existent. Il est également possible de spécifier un script en particulier en utilisant l'option -script-args comme ci-dessous :
+
+Copy code
+nmap --script vuln -script-args vulscandetail=1 [IP ou plage d'IP]
+Il est important de noter que ces scripts ne garantissent pas une détection complète des vulnérabilités. Il est donc important de combiner ces scripts avec d'autres outils d'analyse de vulnérabilité pour
+
+
+
