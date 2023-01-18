@@ -1,0 +1,34 @@
+Il est possible d'utiliser l'outil Nmap (Network Mapper) pour scanner un site internet et détecter les ports ouverts sur les serveurs qui hébergent le site. Pour cela, vous devrez ouvrir un terminal et entrer la commande suivante :
+
+Copy code
+nmap -sS -p 80,443 [adresse du site]
+Cette commande utilise l'option -sS (SYN scan) pour envoyer des paquets SYN aux ports spécifiés (80 et 443 dans cet exemple) et détecter ceux qui sont ouverts sur le serveur. L'option -p permet de spécifier les ports à scanner.
+
+Par exemple, pour scanner le site https://www.example.com, vous devrez entrer la commande suivante :
+
+Copy code
+nmap -sS -p 80,443 www.example.com
+Cela vous donnera une liste des ports ouverts sur le serveur avec leur statut (ouvert, fermé, filtré) et le service associé.
+
+Il est important de noter que certains sites peuvent bloquer les scans automatisés pour des raisons de sécurité. Il est donc important de vérifier les termes d'utilisation et de politique de confidentialité avant de scanner un site internet. Il est également important de respecter les politiques de robots.txt des sites pour éviter de causer des dommages.
+
+
+
+
+Jean Jacques Micheau
+trouver adresse ip site internet avec nmap
+Il est possible d'utiliser l'outil Nmap (Network Mapper) pour trouver l'adresse IP d'un site internet en utilisant la commande :
+
+Copy code
+nmap -sn [nom de domaine]
+La commande -sn permet de réaliser un ping scan qui va permettre de détecter les hôtes actifs sur le réseau et de récupérer leur adresse IP.
+
+Par exemple pour trouver l'adresse IP du site internet example.com, vous devrez entrer la commande suivante:
+
+Copy code
+nmap -sn example.com
+Il est important de noter que certains sites peuvent utiliser des systèmes de load-balancing ou de redirection DNS qui peuvent rendre plus complexe la récupération de l'adresse IP. Il est donc important de vérifier les termes d'utilisation et de politique de confidentialité avant de scanner un site internet. Il est également important de respecter les politiques de robots.txt des sites pour éviter de causer des dommages.
+
+
+
+
