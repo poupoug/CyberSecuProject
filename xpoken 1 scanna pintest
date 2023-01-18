@@ -1,0 +1,93 @@
+Starting Nmap 7.80 ( https://nmap.org ) at 2023-01-18 15:34 CET
+Nmap scan report for xpoken.com (52.84.45.29)
+Host is up (0.0078s latency).
+Other addresses for xpoken.com (not scanned): 52.84.45.116 52.84.45.58 52.84.45.49
+rDNS record for 52.84.45.29: server-52-84-45-29.mrs52.r.cloudfront.net
+Nmap done: 1 IP address (1 host up) scanned in 0.05 seconds
+
+
+Starting Nmap 7.80 ( https://nmap.org ) at 2023-01-18 15:39 CET
+Initiating Ping Scan at 15:39
+Scanning 52.84.45.29 [2 ports]
+Completed Ping Scan at 15:39, 0.01s elapsed (1 total hosts)
+Initiating Parallel DNS resolution of 1 host. at 15:39
+Completed Parallel DNS resolution of 1 host. at 15:39, 0.00s elapsed
+Initiating Connect Scan at 15:39
+Scanning server-52-84-45-29.mrs52.r.cloudfront.net (52.84.45.29) [1000 ports]
+Discovered open port 443/tcp on 52.84.45.29
+Discovered open port 80/tcp on 52.84.45.29
+Completed Connect Scan at 15:39, 4.01s elapsed (1000 total ports)
+Nmap scan report for server-52-84-45-29.mrs52.r.cloudfront.net (52.84.45.29)
+Host is up (0.0087s latency).
+Not shown: 998 filtered ports
+PORT    STATE SERVICE
+80/tcp  open  http
+443/tcp open  https
+
+
+Starting Nmap 7.80 ( https://nmap.org ) at 2023-01-18 15:40 CET
+Illegal netmask in "52.84.45.29/443". Assuming /32 (one host)
+Initiating Ping Scan at 15:40
+Scanning 52.84.45.29 [2 ports]
+Completed Ping Scan at 15:40, 0.01s elapsed (1 total hosts)
+Initiating Parallel DNS resolution of 1 host. at 15:40
+Completed Parallel DNS resolution of 1 host. at 15:40, 0.00s elapsed
+Initiating Connect Scan at 15:40
+Scanning server-52-84-45-29.mrs52.r.cloudfront.net (52.84.45.29) [1000 ports]
+Discovered open port 80/tcp on 52.84.45.29
+Discovered open port 443/tcp on 52.84.45.29
+Completed Connect Scan at 15:40, 4.52s elapsed (1000 total ports)
+Nmap scan report for server-52-84-45-29.mrs52.r.cloudfront.net (52.84.45.29)
+Host is up (0.013s latency).
+Not shown: 998 filtered ports
+PORT    STATE SERVICE
+80/tcp  open  http
+443/tcp open  https
+
+Read data files from: /usr/bin/../share/nmap
+Nmap done: 1 IP address (1 host up) scanned in 4.62 seconds
+
+
+Starting Nmap 7.80 ( https://nmap.org ) at 2023-01-18 15:41 CET
+Illegal netmask in "52.84.45.29/80". Assuming /32 (one host)
+Initiating Ping Scan at 15:41
+Scanning 52.84.45.29 [2 ports]
+Completed Ping Scan at 15:41, 0.01s elapsed (1 total hosts)
+Initiating Parallel DNS resolution of 1 host. at 15:41
+Completed Parallel DNS resolution of 1 host. at 15:41, 0.00s elapsed
+Initiating Connect Scan at 15:41
+Scanning server-52-84-45-29.mrs52.r.cloudfront.net (52.84.45.29) [1000 ports]
+Discovered open port 80/tcp on 52.84.45.29
+Discovered open port 443/tcp on 52.84.45.29
+Completed Connect Scan at 15:41, 4.51s elapsed (1000 total ports)
+Nmap scan report for server-52-84-45-29.mrs52.r.cloudfront.net (52.84.45.29)
+Host is up (0.0083s latency).
+Not shown: 998 filtered ports
+PORT    STATE SERVICE
+80/tcp  open  http
+443/tcp open  https
+
+Read data files from: /usr/bin/../share/nmap
+Nmap done: 1 IP address (1 host up) scanned in 4.61 seconds
+
+
+
+Starting Nmap 7.80 ( https://nmap.org ) at 2023-01-18 15:45 CET
+Nmap scan report for www.xpoken.com (52.84.45.49)
+Host is up (0.0086s latency).
+Other addresses for www.xpoken.com (not scanned): 52.84.45.116 52.84.45.29 52.84.45.58
+rDNS record for 52.84.45.49: server-52-84-45-49.mrs52.r.cloudfront.net
+
+PORT    STATE    SERVICE
+445/tcp filtered microsoft-ds
+
+Starting Nmap 7.80 ( https://nmap.org ) at 2023-01-18 15:44 CET
+Nmap scan report for www.xpoken.com (52.84.45.29)
+Host is up (0.0075s latency).
+Other addresses for www.xpoken.com (not scanned): 52.84.45.58 52.84.45.49 52.84.45.116
+rDNS record for 52.84.45.29: server-52-84-45-29.mrs52.r.cloudfront.net
+
+PORT   STATE SERVICE
+80/tcp open  http
+
+
