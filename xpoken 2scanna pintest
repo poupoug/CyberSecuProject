@@ -1,0 +1,91 @@
+À partir de Nmap 7.80 ( https://nmap.org ) au 2023-01-18 15:34 CET
+Rapport d'analyse Nmap pour xpoken.com (52.84.45.29)
+L'hôte est opérationnel (latence de 0,0078 s).
+Autres adresses pour xpoken.com (non scannées) : 52.84.45.116 52.84.45.58 52.84.45.49
+Enregistrement rDNS pour 52.84.45.29 : server-52-84-45-29.mrs52.r.cloudfront.net
+Nmap terminé : 1 adresse IP (1 hôte actif) scannée en 0,05 seconde
+
+
+À partir de Nmap 7.80 ( https://nmap.org ) au 2023-01-18 15:39 CET
+Lancement de l'analyse Ping à 15:39
+Balayage 52.84.45.29 [2 ports]
+Scan Ping terminé à 15:39, 0.01s écoulé (1 hôtes au total)
+Lancement de la résolution DNS parallèle d'un hôte. à 15:39
+Résolution DNS parallèle terminée de 1 hôte. à 15:39, 0.00s se sont écoulées
+Lancement de Connect Scan à 15:39
+Serveur d'analyse-52-84-45-29.mrs52.r.cloudfront.net (52.84.45.29) [1000 ports]
+Découverte du port ouvert 443/tcp sur 52.84.45.29
+Découverte du port ouvert 80/tcp sur 52.84.45.29
+Analyse de connexion terminée à 15h39, 4,01 secondes se sont écoulées (1000 ports au total)
+Rapport d'analyse Nmap pour server-52-84-45-29.mrs52.r.cloudfront.net (52.84.45.29)
+L'hôte est actif (latence de 0,0087 s).
+Non illustré : 998 ports filtrés
+SERVICE DE L'ÉTAT DU PORT
+80/tcp ouvert http
+443/tcp ouvert https
+
+
+À partir de Nmap 7.80 ( https://nmap.org ) au 2023-01-18 15:40 CET
+Masque de réseau illégal dans "52.84.45.29/443". En supposant /32 (un hôte)
+Lancement de l'analyse Ping à 15h40
+Balayage 52.84.45.29 [2 ports]
+Scan Ping terminé à 15:40, 0.01s écoulé (1 hôtes au total)
+Lancement de la résolution DNS parallèle d'un hôte. à 15h40
+Résolution DNS parallèle terminée de 1 hôte. à 15:40, 0.00s écoulées
+Lancement de Connect Scan à 15:40
+Serveur d'analyse-52-84-45-29.mrs52.r.cloudfront.net (52.84.45.29) [1000 ports]
+Découverte du port ouvert 80/tcp sur 52.84.45.29
+Découverte du port ouvert 443/tcp sur 52.84.45.29
+Analyse de connexion terminée à 15h40, 4,52 secondes se sont écoulées (1000 ports au total)
+Rapport d'analyse Nmap pour server-52-84-45-29.mrs52.r.cloudfront.net (52.84.45.29)
+L'hôte est actif (latence de 0,013 s).
+Non illustré : 998 ports filtrés
+SERVICE DE L'ÉTAT DU PORT
+80/tcp ouvert http
+443/tcp ouvert https
+
+Lire les fichiers de données depuis : /usr/bin/../share/nmap
+Nmap terminé : 1 adresse IP (1 hôte actif) scannée en 4,62 secondes
+
+
+À partir de Nmap 7.80 ( https://nmap.org ) au 2023-01-18 15:41 CET
+Masque de réseau illégal dans "52.84.45.29/80". En supposant /32 (un hôte)
+Lancement de l'analyse Ping à 15:41
+Balayage 52.84.45.29 [2 ports]
+Scan Ping terminé à 15:41, 0.01s écoulé (1 hôtes au total)
+Lancement de la résolution DNS parallèle d'un hôte. à 15:41
+Résolution DNS parallèle terminée de 1 hôte. à 15:41, 0.00s se sont écoulées
+Lancement de Connect Scan à 15:41
+Serveur d'analyse-52-84-45-29.mrs52.r.cloudfront.net (52.84.45.29) [1000 ports]
+Découverte du port ouvert 80/tcp sur 52.84.45.29
+Découverte du port ouvert 443/tcp sur 52.84.45.29
+Analyse de connexion terminée à 15h41, 4,51 secondes se sont écoulées (1000 ports au total)
+Rapport d'analyse Nmap pour server-52-84-45-29.mrs52.r.cloudfront.net (52.84.45.29)
+L'hôte est actif (latence de 0,0083 s).
+Non illustré : 998 ports filtrés
+SERVICE DE L'ÉTAT DU PORT
+80/tcp ouvert http
+443/tcp ouvert https
+
+Lire les fichiers de données depuis : /usr/bin/../share/nmap
+Nmap terminé : 1 adresse IP (1 hôte actif) scannée en 4,61 secondes
+
+
+
+À partir de Nmap 7.80 ( https://nmap.org ) au 2023-01-18 15:45 CET
+Rapport d'analyse Nmap pour www.xpoken.com (52.84.45.49)
+L'hôte est actif (latence de 0,0086 s).
+Autres adresses pour www.xpoken.com (non scannées) : 52.84.45.116 52.84.45.29 52.84.45.58
+Enregistrement rDNS pour 52.84.45.49 : server-52-84-45-49.mrs52.r.cloudfront.net
+
+SERVICE DE L'ÉTAT DU PORT
+445/tcp filtré microsoft-ds
+
+À partir de Nmap 7.80 ( https://nmap.org ) au 2023-01-18 15:44 CET
+Rapport d'analyse Nmap pour www.xpoken.com (52.84.45.29)
+L'hôte est actif (latence de 0,0075 s).
+Autres adresses pour www.xpoken.com (non scannées) : 52.84.45.58 52.84.45.49 52.84.45.116
+Enregistrement rDNS pour 52.84.45.29 : server-52-84-45-29.mrs52.r.cloudfront.net
+
+SERVICE DE L'ÉTAT DU PORT
+80/tcp ouvert http
