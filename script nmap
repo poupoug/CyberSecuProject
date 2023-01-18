@@ -1,0 +1,3 @@
+nmap --script vuln,http-enum www
+nmap --script vuln www.site  
+Nmap (Network Mapper) possède une collection de scripts appelés NSE (Nmap Scripting Engine) qui peuvent être utilisés pour diverses tâches telles que la détection de vulnérabilités, la reconnaissance de services, la collecte d'informations sur les systèmes ciblés, etc. Ces scripts peuvent être utilisés avec la commande Nmap en utilisant l'option --script, suivi du nom du script que vous souhaitez utiliser.
